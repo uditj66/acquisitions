@@ -1,0 +1,67 @@
+1. eslint
+
+The core linter tool for JavaScript/TypeScript.
+
+It analyzes your code and reports problems (syntax errors, unused variables, bad patterns, etc.).
+
+By itself, it doesn’t enforce a specific style — you configure it with plugins and configs.
+
+2. @eslint/js
+
+Official ESLint package that provides the recommended ESLint rules as a shareable config.
+
+Instead of writing all basic rules yourself, you can extend:
+
+import js from "@eslint/js";
+
+export default [
+  js.configs.recommended
+];
+
+
+Helps you start with a solid base config.
+
+3. prettier
+
+A code formatter, not a linter.
+
+It automatically formats your code (indentation, semicolons, quotes, wrapping, etc.) for consistency.
+
+Example:
+
+Input: const x= [1,2,3]
+
+Prettier → const x = [1, 2, 3];
+
+4. eslint-config-prettier
+
+A config that turns off ESLint rules that conflict with Prettier.
+
+Example: ESLint might say “use 2 spaces”, but Prettier might reformat to “4 spaces”.
+
+This package ensures ESLint doesn’t fight Prettier over formatting.
+
+Usage in config:
+
+extends: ["eslint:recommended", "plugin:prettier/recommended"]
+
+5. eslint-plugin-prettier
+
+Runs Prettier as an ESLint rule.
+
+That means formatting issues show up as ESLint errors/warnings.
+
+Example: If you forgot a semicolon, ESLint will highlight it and suggest fixing via Prettier.
+
+
+
+## How they work together
+1.ESLint → catches code quality issues.
+
+2.Prettier → handles formatting.
+
+3.eslint-config-prettier → prevents rule clashes between ESLint & Prettier.
+
+4.eslint-plugin-prettier → lets Prettier run inside ESLint, so you only need one tool (npm run lint --fix) to do linting + formatting.
+
+5.@eslint/js → gives you a solid base set of ESLint rules.
