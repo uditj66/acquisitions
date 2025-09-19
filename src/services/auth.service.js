@@ -1,0 +1,42 @@
+import bcrypt from 'bcryptjs';
+import logger from '#config/logger.js';
+import { db } from '#config/database.js';
+import { users } from '#models/user.model.js';
+import { eq } from 'drizzle-orm';
+export const hashPassword = async password => {
+  try {
+    if (!password) throw new Error('password is required 👎');
+    return await bcrypt.hash(password, 10);
+  } catch (error) {
+    logger.error('ERROR hashing the password ', error);
+    throw new Error('Error Hashing ');
+  }
+};
+export const createUser = async ({ name, email, password, role = 'user' }) => {
+  try {
+    // Remember all These query will Always return an array
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
+    if (existingUser.length > 0)
+      throw new Error('User already exists with this Email');
+    const hashedPassword = await hashPassword(password);
+    const [newUser] = await db
+      .insert(users)
+      .values({ name, email, password: hashedPassword, role })
+      .returning({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role: users.role,
+        created_at: users.createdAt,
+      });
+    logger.info(`User ${newUser.email} Created Successfully`);
+    return newUser;
+  } catch (error) {
+    logger.error(`Error creating user :${error}`);
+    throw error;
+  }
+};

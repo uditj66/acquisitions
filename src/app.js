@@ -4,6 +4,8 @@ import logger from '#config/logger.js';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import authRoutes from '#routes/auth.routes.js';
+import morgan from 'morgan';
 const app = express();
 app.use(helmet());
 app.use(cors());
@@ -21,8 +23,22 @@ app.use(
   })
 );
 dotenv.config();
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   logger.info('HELLO from acquistions');
   res.status(200).send('Hello from acquisitions');
 });
+app.get('/api', (req, res) => {
+  res.status(200).json({
+    message: 'Acquisition running perfectly',
+  });
+});
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'Ok',
+    message: 'Health is perfect',
+    timestamps: new Date(Date.now()),
+    uptime: process.uptime(),
+  });
+});
+app.use('/api/auth', authRoutes);
 export default app;
