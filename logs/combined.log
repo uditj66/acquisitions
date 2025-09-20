@@ -241,3 +241,6 @@
 {"level":"error","message":"Error creating user :Error: User already exists with this Email","service":"acquistions-api"}
 {"level":"error","service":"acquistions-api"}
 {"level":"info","message":"::1 - - [19/Sep/2025:21:51:00 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 409 49 \"-\" \"PostmanRuntime/7.45.0\"","service":"acquistions-api"}
+{"level":"info","message":"HELLO from acquistions","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [20/Sep/2025:13:58:45 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [20/Sep/2025:13:58:45 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\"","service":"acquistions-api"}
