@@ -5,6 +5,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 ## Project Overview
 
 This is a Node.js Express API for an acquisitions system with user authentication, built with:
+
 - **Framework**: Express.js (ES modules)
 - **Database**: PostgreSQL with Neon serverless
 - **ORM**: Drizzle ORM
@@ -33,7 +34,9 @@ npm run format:check   # Check Prettier formatting
 ## Architecture Structure
 
 ### Import Path Mapping
+
 The project uses Node.js subpath imports for clean module resolution:
+
 - `#config/*` → `./src/config/*`
 - `#controllers/*` → `./src/controllers/*`
 - `#middlewares/*` → `./src/middlewares/*`
@@ -46,10 +49,12 @@ The project uses Node.js subpath imports for clean module resolution:
 ### Key Components
 
 **Database Configuration** (`src/config/database.js`):
+
 - Neon serverless PostgreSQL connection
 - Drizzle ORM setup with HTTP adapter
 
 **Authentication Flow**:
+
 1. **Routes** (`src/routes/auth.routes.js`) - Define endpoints
 2. **Controllers** (`src/controllers/auth.controller.js`) - Handle requests/responses
 3. **Validations** (`src/validations/auth.validation.js`) - Zod schema validation
@@ -57,12 +62,14 @@ The project uses Node.js subpath imports for clean module resolution:
 5. **Models** (`src/models/user.model.js`) - Drizzle schema definitions
 
 **Utilities**:
+
 - `src/utils/jwt.js` - JWT token signing/verification
 - `src/utils/cookies.js` - HTTP cookie management with security defaults
 - `src/utils/format.js` - Validation error formatting
 - `src/utils/try-catch.js` - Async error handling wrapper
 
 **Logging** (`src/config/logger.js`):
+
 - Winston logger with file and console transports
 - Integrated with Morgan for HTTP request logging
 - Environment-based configuration (dev vs production)
@@ -70,6 +77,7 @@ The project uses Node.js subpath imports for clean module resolution:
 ## Database Schema
 
 **Users Table** (`users`):
+
 - `id` (serial, primary key)
 - `name` (varchar, 250 chars)
 - `email` (varchar, 250 chars, unique)

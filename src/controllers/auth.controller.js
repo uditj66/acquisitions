@@ -51,19 +51,19 @@ export const signIn = async (req, res, next) => {
         details: formatValidationError(validationResult.error),
       });
     }
-    
+
     const { email, password } = validationResult.data;
     const user = await authenticateUser({ email, password });
-    
+
     const generateToken = token.sign({
       id: user.id,
       email: user.email,
       role: user.role,
     });
-    
+
     cookies.set(res, 'token', {}, generateToken);
     logger.info(`User ${user.email} signed in successfully`);
-    
+
     res.status(200).json({
       message: 'User signed in successfully',
       user: {
@@ -88,7 +88,7 @@ export const signOut = async (req, res, next) => {
   try {
     cookies.clear(res, 'token');
     logger.info('User signed out successfully');
-    
+
     res.status(200).json({
       message: 'User signed out successfully',
     });

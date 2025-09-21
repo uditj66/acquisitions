@@ -18,7 +18,7 @@ export const token = {
     try {
       return jwt.verify(token, JWT_SECRET);
     } catch (error) {
-      logger.error('Failed to verify the token');
+      logger.error('Failed to verify the token', error);
       throw new Error('Failed to verify the Token');
     }
   },

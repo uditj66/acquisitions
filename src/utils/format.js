@@ -5,5 +5,5 @@ export const formatValidationError = errors => {
     return errors.issues.map(error => error.message).join(',');
 
   //   If we have single error then
-  return json.stringify(errors);
+  return JSON.stringify(errors);
 };

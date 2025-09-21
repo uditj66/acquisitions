@@ -1,11 +1,12 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import logger from '#config/logger.js';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
+import userRoutes from '#routes/user.route.js';
 import morgan from 'morgan';
+import securityMiddleware from '#middlewares/security.middleware.js';
 const app = express();
 app.use(helmet());
 app.use(cors());
@@ -22,7 +23,7 @@ app.use(
     stream: { write: message => logger.info(message.trim()) },
   })
 );
-dotenv.config();
+app.use(securityMiddleware);
 app.get('/', (req, res) => {
   logger.info('HELLO from acquistions');
   res.status(200).send('Hello from acquisitions');
@@ -41,4 +42,10 @@ app.get('/health', (req, res) => {
   });
 });
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Route not found',
+  });
+});
 export default app;

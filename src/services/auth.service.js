@@ -32,7 +32,7 @@ export const authenticateUser = async ({ email, password }) => {
       .from(users)
       .where(eq(users.email, email))
       .limit(1);
-    
+
     if (!user) {
       throw new Error('Invalid email or password');
     }

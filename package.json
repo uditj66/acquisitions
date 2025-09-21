@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "imports": {
+    "#src/*": "./src/*",
     "#config/*": "./src/config/*",
     "#controllers/*": "./src/controllers/*",
     "#middlewares/*": "./src/middlewares/*",
@@ -15,13 +16,17 @@
   },
   "scripts": {
     "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "dev:docker": "sh ./scripts/dev.sh",
+    "prod:docker": "sh ./scripts/prod.sh",
+    "test": " set NODE_OPTIONS=--experimental-vm-modules && jest"
   },
   "repository": {
     "type": "git",
@@ -36,6 +41,8 @@
   },
   "homepage": "https://github.com/uditj66/acquisitions#readme",
   "dependencies": {
+    "@arcjet/inspect": "^1.0.0-beta.11",
+    "@arcjet/node": "^1.0.0-beta.11",
     "@neondatabase/serverless": "^1.0.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
@@ -55,6 +62,8 @@
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2"
+    "jest": "^30.1.3",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4"
   }
 }
